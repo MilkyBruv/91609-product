@@ -41,6 +41,7 @@ int main(int argc, char const *argv[])
     float new_height = 72;
     float new_x = 0;
     float new_y = 0;
+    int cc = 1;
 
     al_init();
     al_init_primitives_addon();
@@ -57,27 +58,27 @@ int main(int argc, char const *argv[])
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
 
-    al_set_window_title(display, "Bitmap scale test");
+    al_set_window_title(display, "Inner Display Scale Test");
 
     ALM_RECTANGLE rect1;
     ALM_RECTANGLE rect2;
 
     rect1.x = 0;
     rect1.y = 0;
-    rect1.width = 32;
-    rect1.height = 32;
+    rect1.width = 11;
+    rect1.height = 11;
 
     rect2.x = 0;
     rect2.y = 0;
-    rect2.width = 32;
-    rect2.height = 32;
+    rect2.width = 11;
+    rect2.height = 11;
 
     al_init_image_addon();
     ALLEGRO_BITMAP* image = al_load_bitmap("./src/main/testimage.jpg");
 
     ALLEGRO_BITMAP* inner_display = al_create_bitmap(128, 72);
     al_set_target_bitmap(inner_display);
-    al_clear_to_color(al_map_rgb(255, 255, 0));
+    al_clear_to_color(al_map_rgb(0, 0, 255));
     al_set_target_bitmap(al_get_backbuffer(display));
 
     al_start_timer(timer);
@@ -91,7 +92,12 @@ int main(int argc, char const *argv[])
         if (alm_rectangles_collided(rect1, rect2))
         {
             
-            //
+            cc = 0;
+
+        } else
+        {
+
+            cc = 1;
 
         }
 
@@ -156,7 +162,7 @@ int main(int argc, char const *argv[])
 
             al_set_target_bitmap(inner_display);
 
-                al_clear_to_color(al_map_rgb(255, 255, 0));
+                al_clear_to_color(al_map_rgb(0, 0, 255 * cc));
                 al_draw_scaled_bitmap(image, 0, 0, 100, 100, rect1.x, rect1.y, 10, 10, 0);
                 al_draw_scaled_bitmap(image, 0, 0, 100, 100, rect2.x, rect2.y, 10, 10, 0);
 
