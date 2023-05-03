@@ -36,6 +36,11 @@ int main(int argc, char const *argv[])
     bool running = true;
     float scale_x = 1;
     float scale_y = 1;
+    float scale = 1;
+    float new_width = 128;
+    float new_height = 72;
+    float new_x = 0;
+    float new_y = 0;
 
     al_init();
     al_init_primitives_addon();
@@ -83,17 +88,19 @@ int main(int argc, char const *argv[])
         ALLEGRO_EVENT event;
         al_wait_for_event(event_queue, &event);
 
-        // if (alm_rectangles_collided(rect1, rect2))
-        // {
+        if (alm_rectangles_collided(rect1, rect2))
+        {
             
-        //     //
+            //
 
-        // }
+        }
 
         if (event.type == ALLEGRO_EVENT_DISPLAY_RESIZE)
         {
 
             al_acknowledge_resize(display);
+
+            al_clear_to_color(al_map_rgb(0, 0, 0));
 
         }
 
@@ -117,28 +124,28 @@ int main(int argc, char const *argv[])
             if (event.keyboard.keycode == ALLEGRO_KEY_LEFT)
             {
 
-                rect1.x -= 16;
+                rect1.x -= 1;
 
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_RIGHT)
             {
 
-                rect1.x += 16;
+                rect1.x += 1;
 
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_UP)
             {
 
-                rect1.y -= 16;
+                rect1.y -= 1;
 
             }
 
             if (event.keyboard.keycode == ALLEGRO_KEY_DOWN)
             {
 
-                rect1.y += 16;
+                rect1.y += 1;
 
             }
 
@@ -147,19 +154,23 @@ int main(int argc, char const *argv[])
         if (event.type == ALLEGRO_EVENT_TIMER)
         {
 
-            al_clear_to_color(al_map_rgb(255, 0, 0));
-
             al_set_target_bitmap(inner_display);
 
                 al_clear_to_color(al_map_rgb(255, 255, 0));
-                al_draw_bitmap(image, 0, 0, 0);
+                al_draw_scaled_bitmap(image, 0, 0, 100, 100, rect1.x, rect1.y, 10, 10, 0);
+                al_draw_scaled_bitmap(image, 0, 0, 100, 100, rect2.x, rect2.y, 10, 10, 0);
 
             al_set_target_bitmap(al_get_backbuffer(display));
 
             scale_x = (float) al_get_display_width(display) / 128;
             scale_y = (float) al_get_display_height(display) / 72;
+            scale = min(scale_x, scale_y);
+            new_width = 128 * scale;
+            new_height = 72 * scale;
+            new_x = (al_get_display_width(display) / 2) - (new_width / 2);
+            new_y = (al_get_display_height(display) / 2) - (new_height / 2);
 
-            al_draw_scaled_bitmap(inner_display, 0, 0, 128, 72, 0, 0, 128 * scale_x, 72 * scale_y, 0);
+            al_draw_scaled_bitmap(inner_display, 0, 0, 128, 72, new_x, new_y, new_width, new_height, 0);
 
             al_flip_display();
 
