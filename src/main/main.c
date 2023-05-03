@@ -70,7 +70,7 @@ int main(int argc, char const *argv[])
     al_init_image_addon();
     ALLEGRO_BITMAP* image = al_load_bitmap("./src/main/testimage.jpg");
 
-    ALLEGRO_BITMAP* inner_display = al_create_bitmap(100, 100);
+    ALLEGRO_BITMAP* inner_display = al_create_bitmap(128, 72);
     al_set_target_bitmap(inner_display);
     al_clear_to_color(al_map_rgb(255, 255, 0));
     al_set_target_bitmap(al_get_backbuffer(display));
@@ -156,10 +156,10 @@ int main(int argc, char const *argv[])
 
             al_set_target_bitmap(al_get_backbuffer(display));
 
-            scale_x = (float) al_get_display_width(display) / 100;
-            scale_y = (float) al_get_display_height(display) / 100;
+            scale_x = (float) al_get_display_width(display) / 128;
+            scale_y = (float) al_get_display_height(display) / 72;
 
-            al_draw_scaled_bitmap(inner_display, 0, 0, 128, 72, 0, 0, 100 * scale_x, 100 * scale_y, 0);
+            al_draw_scaled_bitmap(inner_display, 0, 0, 128, 72, 0, 0, 128 * scale_x, 72 * scale_y, 0);
 
             al_flip_display();
 
