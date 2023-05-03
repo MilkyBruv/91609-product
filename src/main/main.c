@@ -33,16 +33,9 @@ bool alm_rectangles_collided(ALM_RECTANGLE rect1, ALM_RECTANGLE rect2)
 int main(int argc, char const *argv[])
 {
 
-    int iw = 500, 
-        ih = 500, 
-        ix = 0, 
-        iy = 0, 
-        diw = 100, 
-        dih = 100, 
-        dw = 0, 
-        dh = 0;
     bool running = true;
-    float scale;
+    float scale_x = 1;
+    float scale_y = 1;
 
     al_init();
     al_init_primitives_addon();
@@ -76,7 +69,11 @@ int main(int argc, char const *argv[])
 
     al_init_image_addon();
     ALLEGRO_BITMAP* image = al_load_bitmap("./src/main/testimage.jpg");
+
     ALLEGRO_BITMAP* inner_display = al_create_bitmap(100, 100);
+    al_set_target_bitmap(inner_display);
+    al_clear_to_color(al_map_rgb(255, 255, 0));
+    al_set_target_bitmap(al_get_backbuffer(display));
 
     al_start_timer(timer);
 
@@ -97,35 +94,6 @@ int main(int argc, char const *argv[])
         {
 
             al_acknowledge_resize(display);
-
-            dw = al_get_display_width(display);
-            dh = al_get_display_height(display);
-
-            if (dw > dh)
-            {
-                
-                iw = iw;
-                ih = dh;
-
-            } else if (dw < dh)
-            {
-                
-                iw = dw;
-                ih = ih;
-
-            } else if (dw == dh)
-            {
-                
-                iw = iw;
-                ih = ih;
-
-            }
-
-            iw = iw * scale;
-            ih = ih * scale;
-
-            ix = (al_get_display_width(display) / 2) - (iw / 2);
-            iy = (al_get_display_height(display) / 2) - (ih / 2);
 
         }
 
@@ -181,7 +149,17 @@ int main(int argc, char const *argv[])
 
             al_clear_to_color(al_map_rgb(255, 0, 0));
 
-            al_draw_bitmap(image, 0, 0, 0);
+            al_set_target_bitmap(inner_display);
+
+                al_clear_to_color(al_map_rgb(255, 255, 0));
+                al_draw_bitmap(image, 0, 0, 0);
+
+            al_set_target_bitmap(al_get_backbuffer(display));
+
+            scale_x = (float) al_get_display_width(display) / 100;
+            scale_y = (float) al_get_display_height(display) / 100;
+
+            al_draw_scaled_bitmap(inner_display, 0, 0, 128, 72, 0, 0, 100 * scale_x, 100 * scale_y, 0);
 
             al_flip_display();
 
@@ -189,9 +167,9 @@ int main(int argc, char const *argv[])
 
     }
         
-    al_use_shader(NULL);
     al_destroy_display(display);
     al_destroy_bitmap(image);
+    al_destroy_bitmap(inner_display);
     al_uninstall_keyboard();
     al_destroy_timer(timer);
 
