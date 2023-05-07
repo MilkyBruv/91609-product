@@ -1,3 +1,3 @@
 run:
-	javac -d . -sourcepath src/main/*.java;src/sus/*.java src/main/*.java src/sus/*.java
+	javac -d . -sourcepath src/main/*.java;src/awtgl/window/*.java src/main/*.java src/awtgl/window/*.java
 	java main/Main
