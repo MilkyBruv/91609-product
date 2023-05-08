@@ -8,10 +8,13 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import main.Updater;
+
 public class InnerDisplay extends JPanel implements Runnable {
     
     private Thread thread;
     private Window window;
+    private Updater updater;
 
     public int innerX;
     public int innerY;
@@ -19,11 +22,13 @@ public class InnerDisplay extends JPanel implements Runnable {
     public int innerWidth;
     public int baseInnerHeight;
     public int baseInnerWidth;
+    public float scale;
     public BufferedImage innerDisplayImage;
 
     public InnerDisplay(int width, int height, Window window) {
 
         this.window = window;
+        this.updater = new Updater(window, this);
 
         this.innerX = 0;
         this.innerY = 0;
@@ -34,7 +39,6 @@ public class InnerDisplay extends JPanel implements Runnable {
         this.innerDisplayImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         this.setPreferredSize(new Dimension(window.getContentPane().getWidth(), window.getContentPane().getHeight()));
-        this.setBackground(new Color(0xf4f4ee));
         this.setDoubleBuffered(true);
         this.setFocusable(true);
 
@@ -44,7 +48,7 @@ public class InnerDisplay extends JPanel implements Runnable {
 
     public void update() {
 
-        //
+        this.updater.update();
 
     }
 
@@ -56,16 +60,15 @@ public class InnerDisplay extends JPanel implements Runnable {
 
         Graphics2D idg2d = (Graphics2D) this.innerDisplayImage.getGraphics();
         
-            idg2d.setColor(new Color(0xefef77));
-            idg2d.drawLine(0, 0, 32, 58);
+            this.updater.draw(this.innerDisplayImage.getGraphics());
         
         idg2d.dispose();
 
         Graphics2D g2d = (Graphics2D) g;
 
-            float scale = Math.min(this.window.getContentPane().getWidth() / this.baseInnerWidth, this.window.getContentPane().getHeight() / this.baseInnerHeight);
-            this.innerWidth = Math.round(this.baseInnerWidth * scale);
-            this.innerHeight = Math.round(this.baseInnerHeight * scale);
+            this.scale = Math.min(this.window.getContentPane().getWidth() / this.baseInnerWidth, this.window.getContentPane().getHeight() / this.baseInnerHeight);
+            this.innerWidth = Math.round(this.baseInnerWidth * this.scale);
+            this.innerHeight = Math.round(this.baseInnerHeight * this.scale);
             this.innerX = (this.window.getContentPane().getWidth() / 2) - (this.innerWidth / 2);
             this.innerY = (this.window.getContentPane().getHeight() / 2) - (this.innerHeight / 2);
 
@@ -110,6 +113,14 @@ public class InnerDisplay extends JPanel implements Runnable {
             }
 
         }
+
+    }
+
+
+
+    public Window getWindow() {
+
+        return this.window;
 
     }
     
