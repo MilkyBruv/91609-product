@@ -1,3 +1,5 @@
 run:
-	javac -d classfiles -sourcepath src/java/main/*.java;src/java/awtgl/window/*.java src/java/main/*.java src/java/awtgl/window/*.java
+	
+	python make.py
+
 	java -cp classfiles main/Main
