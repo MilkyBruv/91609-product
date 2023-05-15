@@ -10,9 +10,11 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import awtgl.math.Vector2f;
 import awtgl.window.GameUpdater;
 import awtgl.window.InnerDisplay;
 import awtgl.window.Window;
+import physics.PhysicsSpace;
 
 public class Updater extends GameUpdater {
 
@@ -20,6 +22,8 @@ public class Updater extends GameUpdater {
     int y;
     BufferedImage testImage;
     Random random;
+    PhysicsSpace space;
+    Player player;
 
     public Updater(Window window, InnerDisplay innerDisplay) {
         
@@ -40,6 +44,10 @@ public class Updater extends GameUpdater {
 
         }
 
+        this.space = new PhysicsSpace(new Vector2f(0f, 0.00098f));
+        this.player = new Player(this.space);
+        this.space.addObject(player);
+
     }
 
     @Override
@@ -47,6 +55,8 @@ public class Updater extends GameUpdater {
 
         this.x = this.cursorMovementHandler.getPos()[0];
         this.y = this.cursorMovementHandler.getPos()[1];
+
+        this.space.update();
 
     }
 
@@ -57,22 +67,14 @@ public class Updater extends GameUpdater {
 
             g2d.setColor(new Color(0x000000));
             g2d.fillRect(0, 0, 128, 72);
+            
+            g2d.setColor(new Color(0xffe44));
+            g2d.drawRect(this.player.pos.x, this.player.pos.y, 16, 16);
+            g2d.drawRect(50, 10, 16, 16);
 
-            g2d.setColor(new Color(this.random.nextInt(255), this.random.nextInt(255), this.random.nextInt(255)));
-            g2d.drawLine(0, 0, this.x, this.y);
+            // g2d.drawImage(this.testImage, this.player.pos.x, this.player.pos.y, 16, 16, null);
 
-            g2d.drawImage(this.testImage, 0, 0, 10, 5, null);
-
-            g2d.drawRoundRect(
-
-                10,
-                10,
-                20,
-                20,
-                20,
-                20
-             
-            );
+            System.out.println("X: " + this.player.pos.x + "\nY: " + this.player.pos.y + "\n\n");
 
         g2d.dispose();
 

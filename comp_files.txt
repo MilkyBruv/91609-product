@@ -1,4 +1,7 @@
-src/java/main/*.java
+src/java/awtgl/math/*.java
+src/java/awtgl/image/*.java
+src/java/awtgl/particle/*.java
 src/java/awtgl/window/*.java
-src/java/awtgl/physics/*.java
-src/java/awtgl/physics/convert/*.java
+src/java/main/*.java
+src/java/physics/*.java
+src/java/physics/convert/*.java

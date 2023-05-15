@@ -1,7 +1,7 @@
-from os import system, getcwd
+from os import system
 
-sourcepath_args = ""
-files_args = "!"
+sourcepath_args = "!"
+files_args = ""
 final_cmd = "javac -d classfiles -sourcepath "
 
 with open("./comp_files.txt") as comp_file:
@@ -10,10 +10,12 @@ with open("./comp_files.txt") as comp_file:
 
 for file in files:
 
+    file = file.replace("\n", "")
+
     sourcepath_args += ";" + file
     files_args += file + " "
 
-sourcepath_args.replace("!;", "")
+sourcepath_args = sourcepath_args.replace("!;", "")
 
 final_cmd += sourcepath_args + " " + files_args
 
