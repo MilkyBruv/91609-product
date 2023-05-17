@@ -1,6 +1,6 @@
 package awtgl.math;
 
-public class Vector2i {
+public class Vector2i extends Vector {
     
     public int x;
     public int y;
@@ -50,10 +50,10 @@ public class Vector2i {
 
 
 
-    public void set(Vector2i vec) {
+    public void set(Vector vec) {
 
-        this.x = vec.x;
-        this.y = vec.y;
+        this.x = vec.x.intValue();
+        this.y = vec.y.intValue();
 
     }
 
@@ -77,10 +77,10 @@ public class Vector2i {
 
 
 
-    public void add(Vector2i vec) {
+    public void add(Vector vec) {
 
-        this.x += vec.x;
-        this.y += vec.y;
+        this.x += vec.x.intValue();
+        this.y += vec.y.intValue();
 
     }
 
@@ -104,10 +104,10 @@ public class Vector2i {
 
 
 
-    public void sub(Vector2i vec) {
+    public void sub(Vector vec) {
 
-        this.x -= vec.x;
-        this.y -= vec.y;
+        this.x -= vec.x.intValue();
+        this.y -= vec.y.intValue();
 
     }
 
@@ -131,10 +131,10 @@ public class Vector2i {
 
 
 
-    public void mul(Vector2i vec) {
+    public void mul(Vector vec) {
 
-        this.x *= vec.x;
-        this.y *= vec.y;
+        this.x *= vec.x.intValue();
+        this.y *= vec.y.intValue();
 
     }
 
@@ -158,11 +158,11 @@ public class Vector2i {
 
 
 
-    public void div(Vector2i vec) {
+    public void div(Vector vec) {
 
-        this.x /= vec.x;
-        this.y /= vec.y;
+        this.x /= vec.x.intValue();
+        this.y /= vec.y.intValue();
 
     }
-
+    
 }

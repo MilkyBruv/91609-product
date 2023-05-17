@@ -1,6 +1,6 @@
 package awtgl.math;
 
-public class Vector2f {
+public class Vector2f extends Vector {
     
     public float x;
     public float y;
@@ -50,10 +50,10 @@ public class Vector2f {
 
 
 
-    public void set(Vector2i vec) {
+    public void set(Vector vec) {
 
-        this.x = vec.x;
-        this.y = vec.y;
+        this.x = vec.x.floatValue();
+        this.y = vec.y.floatValue();
 
     }
 
@@ -77,10 +77,10 @@ public class Vector2f {
 
 
 
-    public void add(Vector2i vec) {
+    public void add(Vector vec) {
 
-        this.x += vec.x;
-        this.y += vec.y;
+        this.x += vec.x.floatValue();
+        this.y += vec.y.floatValue();
 
     }
 
@@ -104,10 +104,10 @@ public class Vector2f {
 
 
 
-    public void sub(Vector2i vec) {
+    public void sub(Vector vec) {
 
-        this.x -= vec.x;
-        this.y -= vec.y;
+        this.x -= vec.x.floatValue();
+        this.y -= vec.y.floatValue();
 
     }
 
@@ -131,10 +131,10 @@ public class Vector2f {
 
 
 
-    public void mul(Vector2i vec) {
+    public void mul(Vector vec) {
 
-        this.x *= vec.x;
-        this.y *= vec.y;
+        this.x *= vec.x.floatValue();
+        this.y *= vec.y.floatValue();
 
     }
 
@@ -158,10 +158,10 @@ public class Vector2f {
 
 
 
-    public void div(Vector2i vec) {
+    public void div(Vector vec) {
 
-        this.x /= vec.x;
-        this.y /= vec.y;
+        this.x /= vec.x.floatValue();
+        this.y /= vec.y.floatValue();
 
     }
     

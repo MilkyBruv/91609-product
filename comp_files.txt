@@ -3,5 +3,5 @@ src/java/awtgl/image/*.java
 src/java/awtgl/particle/*.java
 src/java/awtgl/window/*.java
 src/java/main/*.java
-src/java/physics/*.java
-src/java/physics/convert/*.java
+src/java/game/entity/*.java
+src/java/game/entity/tile/*.java
