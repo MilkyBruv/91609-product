@@ -1,4 +1,4 @@
-package game.entity;
+package awtgl.entity;
 
 import awtgl.math.Vector2i;
 import main.Updater;

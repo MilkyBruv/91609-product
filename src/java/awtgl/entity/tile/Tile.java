@@ -1,15 +1,16 @@
-package game.entity.tile;
+package awtgl.entity.tile;
 
-import game.entity.DisplayEntity;
+import awtgl.entity.DisplayEntity;
 import main.Updater;
 
 public class Tile extends DisplayEntity {
 
     public int id;
 
-    public Tile(Updater updater) {
+    public Tile(Updater updater, int id) {
         
         super(updater);
+        this.id = id;
         
     }
     
