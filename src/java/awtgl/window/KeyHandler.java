@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class KeyHandler {
+public abstract class KeyHandler {
 
     private static final Map<Integer, Boolean> pressedKeysCodesMap = new HashMap<>();
     private static final Map<Character, Boolean> pressedKeysCharsMap = new HashMap<>();
