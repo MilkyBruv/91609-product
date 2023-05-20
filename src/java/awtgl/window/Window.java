@@ -27,6 +27,7 @@ public class Window extends JFrame {
 
             GraphicsEnvironment environment = GraphicsEnvironment.getLocalGraphicsEnvironment();
             GraphicsDevice device = environment.getDefaultScreenDevice();
+
             this.setUndecorated(true);
             this.setResizable(false);
 
@@ -46,6 +47,7 @@ public class Window extends JFrame {
         }
 
         MouseButtonHandler mouseButtonHandler = new MouseButtonHandler();
+        
         this.addMouseListener(mouseButtonHandler);
 
     }
